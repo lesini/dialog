@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
     <title>dialog</title>
     <link rel="stylesheet" href="dialog.css" media="screen" title="no title" charset="utf-8">
     <script type="text/javascript" src="zepto.min.js"></script>
@@ -12,22 +13,71 @@
             margin: 0;
             padding: 0;
         }
+
+        .btnbox {
+            width: 400px;
+            margin: 200px auto;
+        }
+
+        .btnbox a {
+            display: inline-block;
+            width: 130px;
+            height: 40px;
+            line-height: 40px;
+            background: #ccc;
+            color: #fff;
+            border-radius: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 
-<body>
+<body style="height:3000px">
+
+    <div class="btnbox">
+        <a href="javascript:;" id="message">message</a>
+        <a href="javascript:;" id="alert">alert</a>
+        <a href="javascript:;" id="confirm">confirm</a>
+    </div>
+
+
 
     <script type="text/javascript">
         $(function() {
 
-            var s = dialog({
-                titleText: false,
-                okText: '确定',
-                ok: function() {
-                    console.log('执行回调');
-                },
-                cancelText: '取消'
+            $('body').on('tap', function() {
+                console.log('穿透了');
             });
+            $('#message').on('tap', function() {
+                dialog({
+                    titleText:false,
+                    okText:false,
+                    cancelText:false,
+                    closeBtn:false,
+                    time:'2000',
+                    content:'啊还是不肯接啊刷卡结婚的卡号SD卡实践活动卡死机会的会计师'
+                });
+            });
+            $('#alert').on('tap', function() {
+                dialog({
+                    titleText: false,
+                    okText: '确定',
+                    cancelText:false,
+                    closeBtn:false,
+                    content:'ALERT'
+                });
+            });
+            $('#confirm').on('tap', function() {
+                dialog({
+                    titleText: false,
+                    okText: '确定',
+                    ok: function() {
+                        console.log('执行回调');
+                    },
+                    cancelText: '取消'
+                });
+            });
+
         });
     </script>
 </body>

@@ -34,17 +34,20 @@
             this.close();
         },
         create: function() {
-            var contentHtml = '';
-            if (this.params.titleText) contentHtml += '<h3 class="title">' + this.params.titleText + '</h3>';
-            if (this.params.closeBtn) contentHtml += '<a class="dialog_close" id="dialog_close" href="javascript:;">+</a>';
-            if (this.params.content) contentHtml += '<div class="dialog_content">' + this.params.content + '</div>';
+            this.contentHtml = '';
+            if (this.params.titleText) this.contentHtml += '<h3 class="title">' + this.params.titleText + '</h3>';
+            if (this.params.closeBtn) this.contentHtml += '<a class="dialog_close" id="dialog_close" href="javascript:;">+</a>';
+            if (this.params.content) this.contentHtml += '<div class="dialog_content">' + this.params.content + '</div>';
             if (this.params.okText || this.params.cancelTex) {
-                var btnHtml = '';
-                if (this.params.okText) btnHtml += '<a href="javascript:;" id="dialog_ok">' + this.params.okText + '</a>';
-                if (this.params.cancelText) btnHtml += '<a href="javascript:;" id="dialog_cancel">' + this.params.cancelText + '</a>';
-                contentHtml += '<div class="dialog_btn_box">' + btnHtml + '</div>';
+                this.btnHtml= '';
+                if (this.params.okText) this.btnHtml+= '<a href="javascript:;" id="dialog_ok">' + this.params.okText + '</a>';
+                if (this.params.cancelText) this.btnHtml+= '<a href="javascript:;" id="dialog_cancel">' + this.params.cancelText + '</a>';
+                this.contentHtml += '<div class="dialog_btn_box">' + this.btnHtml+ '</div>';
             }
-            this.dialog = $('<div class="dialog_bg "><div class="dialog ">' + contentHtml + '</div></div>').prependTo('body');
+            this.dialog = $('<div class="dialog_bg "><div class="dialog ">' + this.contentHtml + '</div></div>').prependTo('body');
+            this.dialog.on('tap',function(){
+                return false;
+            });
         },
         ok: function() {
             var _this = this;
@@ -79,6 +82,7 @@
         var btn = _this.dialog.find('#dialog_' + btnName + '');
         btn.on('tap', function() {
             typeof cbFn == 'function' ? cbFn() : _this.removeDialog();
+            return false;
         });
     }
 
