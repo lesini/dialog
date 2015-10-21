@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>dialog</title>
-    </head>
-    <body>
+<html style="font-size='40px'">
 
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>dialog</title>
+    <link rel="stylesheet" href="dialog.css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="zepto.min.js"></script>
+    <script type="text/javascript" src="dialog.js"></script>
+    <style media="screen">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        $(function() {
+
+            var s = dialog({
+                titleText: false,
+                okText: '确定',
+                cancelText: '取消',
+                close: true
+            });
+        });
+    </script>
+</body>
+
 </html>
