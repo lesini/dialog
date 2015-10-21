@@ -14,11 +14,11 @@
             //取消按钮显示文字
             cancelText: 'cancel'
         };
-        // 定时删除dialog  默认手动
+        // 定时销毁dialog  默认手动
         //time:1000
-        // 默认不写ok回调函数 点击ok直接销毁dialog  想要执行回调 请自行添加销毁dialog方法 remove();
+        // 默认没有ok回调函数 点击ok直接销毁dialog  想要执行回调后销毁dialog 请自行添加销毁dialog方法 remove();
         // ok:function(){},
-        // 默认不写cancel回调函数 点击cancel直接销毁dialog  想要执行回调 请自行添加销毁dialog方法 remove();
+        // 默认没有cancel回调函数 点击cancel直接销毁dialog  想要执行回调后销毁dialog 请自行添加销毁dialog方法 remove();
         //cancel:function(){}
 
         this.params = $.extend(defaults, options);
@@ -48,45 +48,15 @@
         },
         ok: function() {
             var _this = this;
-            var okFn = _this.params.ok;
-            var btnOk = this.dialog.find('#dialog_ok');
-            if (btnOk) {
-                btnOk.on('tap', function() {
-                    if (typeof okFn == 'function') {
-                        okFn();
-                        return false;
-                    }
-                    _this.removeDialog();
-                });
-            }
+            eventCallbackFn(_this, 'ok');
         },
         cancel: function() {
             var _this = this;
-            var cancelFn = _this.params.cancel;
-            var btnCancel = this.dialog.find('#dialog_cancel');
-            if (btnCancel) {
-                btnCancel.on('tap', function() {
-                    if (typeof cancelFn == 'function') {
-                        cancelFn();
-                        return false;
-                    }
-                    _this.removeDialog();
-                });
-            }
+            eventCallbackFn(_this, 'cancel');
         },
         close: function() {
             var _this = this;
-            var closeFn = _this.params.close;
-            var btnClose = this.dialog.find('#dialog_close');
-            if (btnClose) {
-                btnClose.on('tap', function() {
-                    if (typeof closeFn == 'function') {
-                        closeFn();
-                        return false;
-                    }
-                    _this.removeDialog();
-                });
-            }
+            eventCallbackFn(_this, 'close');
         },
         setTime: function() {
             var _this = this,
@@ -103,6 +73,15 @@
             }
         }
     };
+
+    function eventCallbackFn(_this, btnName) {
+        var cbFn = _this.params[btnName];
+        var btn = _this.dialog.find('#dialog_' + btnName + '');
+        btn.on('tap', function() {
+            typeof cbFn == 'function' ? cbFn() : _this.removeDialog();
+        });
+    }
+
     window.dialog = function(options) {
         return new Dialog(options);
     }
