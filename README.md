@@ -1,8 +1,4 @@
-# webapp
-## Dialog
-
 #### 移动端dialog
-
 
 ##### dialog默认参数 及用法
 ```
