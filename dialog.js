@@ -4,22 +4,22 @@
         //取消任何一个显示直接把参数的值设置为false
         var defaults = {
             //标题
-            titleText: 'title',
+            // titleText: 'title',
             //删除
-            closeBtn: true,
+            // closeBtn: true,
             //内容
             content: 'message!',
             //确定按钮显示文字
-            okText: 'ok',
+            // okText: 'ok',
             //取消按钮显示文字
-            cancelText: 'cancel'
+            // cancelText: 'cancel'
+            // 定时销毁dialog  默认手动
+            //time:1000
+            // 默认没有ok回调函数 点击ok直接销毁dialog  想要执行回调后销毁dialog 请自行添加销毁dialog方法 remove();
+            // ok:function(){},
+            // 默认没有cancel回调函数 点击cancel直接销毁dialog  想要执行回调后销毁dialog 请自行添加销毁dialog方法 remove();
+            //cancel:function(){}
         };
-        // 定时销毁dialog  默认手动
-        //time:1000
-        // 默认没有ok回调函数 点击ok直接销毁dialog  想要执行回调后销毁dialog 请自行添加销毁dialog方法 remove();
-        // ok:function(){},
-        // 默认没有cancel回调函数 点击cancel直接销毁dialog  想要执行回调后销毁dialog 请自行添加销毁dialog方法 remove();
-        //cancel:function(){}
 
         this.params = $.extend(defaults, options);
         this.init();
@@ -39,13 +39,13 @@
             if (this.params.closeBtn) this.contentHtml += '<a class="dialog_close" id="dialog_close" href="javascript:;">+</a>';
             if (this.params.content) this.contentHtml += '<div class="dialog_content">' + this.params.content + '</div>';
             if (this.params.okText || this.params.cancelTex) {
-                this.btnHtml= '';
-                if (this.params.okText) this.btnHtml+= '<a href="javascript:;" id="dialog_ok">' + this.params.okText + '</a>';
-                if (this.params.cancelText) this.btnHtml+= '<a href="javascript:;" id="dialog_cancel">' + this.params.cancelText + '</a>';
-                this.contentHtml += '<div class="dialog_btn_box">' + this.btnHtml+ '</div>';
+                this.btnHtml = '';
+                if (this.params.okText) this.btnHtml += '<a href="javascript:;" id="dialog_ok">' + this.params.okText + '</a>';
+                if (this.params.cancelText) this.btnHtml += '<a href="javascript:;" id="dialog_cancel">' + this.params.cancelText + '</a>';
+                this.contentHtml += '<div class="dialog_btn_box">' + this.btnHtml + '</div>';
             }
             this.dialog = $('<div class="dialog_bg "><div class="dialog ">' + this.contentHtml + '</div></div>').prependTo('body');
-            this.dialog.on('tap',function(){
+            this.dialog.on('tap', function() {
                 return false;
             });
         },
