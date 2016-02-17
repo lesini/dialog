@@ -1,6 +1,6 @@
 #### 移动端dialog
 
-##### dialog默认参数 及用法
+##### dialog默认参数 及用法 依赖zepto
 ```
 var defaults = {
     //标题
